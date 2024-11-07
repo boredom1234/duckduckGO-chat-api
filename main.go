@@ -291,10 +291,18 @@ func main() {
 			c.JSON(http.StatusNotFound, gin.H{"error": "Chat session not found"})
 		}
 	})
+	router.GET("/health", healthCheck())
 
 	port := os.Getenv("PORT")
 	if port == "" {
 		port = "8080"
 	}
 	router.Run(":" + port)
+}
+
+// HEALTH CHECK
+func healthCheck() gin.HandlerFunc {
+	return func(c *gin.Context) {
+		c.JSON(http.StatusOK, gin.H{"status": "ok"})
+	}
 }
