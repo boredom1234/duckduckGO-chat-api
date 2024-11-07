@@ -5,7 +5,7 @@ function sendMessage() {
   const model = document.getElementById('model').value;
   const userId = getUserId(); // Implement this function to get/generate a unique user ID
 
-  fetch(`http://localhost:8080/chat/${model}`, {  // Replace with your API server URL
+  fetch(`https://duckduckgo-chat-api.onrender.com/chat/${model}`, {  // Replace with your API server URL
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
