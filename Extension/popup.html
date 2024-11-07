@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>DuckDuckGo Chat</title>
+</head>
+<body>
+  <h1>DuckDuckGo Chat</h1>
+  <label for="model">AI Model:</label>
+  <select id="model">
+    <option value="gpt-4o-mini">GPT-4o mini</option>
+    <option value="claude-3-haiku">Claude 3 Haiku</option>
+    <option value="llama">Llama 3.1 70B</option>
+    <option value="mixtral">Mixtral 8x7B</option>
+  </select><br><br>
+  <textarea id="userMessage" rows="4" cols="50" placeholder="Enter your message"></textarea><br><br>
+  <button id="sendMessage">Send</button>
+  <div id="response"></div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
