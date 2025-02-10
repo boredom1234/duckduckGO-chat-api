@@ -260,6 +260,9 @@ func main() {
 			return
 		}
 
+		// Log the user's message
+		log.Printf("User %s sent message: %s", userID, reqBody.Message)
+
 		stream, err := chat.FetchStream(reqBody.Message)
 
 		if err != nil {
@@ -271,8 +274,12 @@ func main() {
 		for chunk := range stream {
 			response = append(response, chunk)
 		}
-		c.JSON(http.StatusOK, gin.H{"response": strings.Join(response, "")}) // Send entire response as one string.
+		fullResponse := strings.Join(response, "")
 
+		// Log the AI's response
+		log.Printf("AI response for user %s: %s", userID, fullResponse)
+
+		c.JSON(http.StatusOK, gin.H{"response": fullResponse})
 	})
 
 	router.DELETE("/chat/:model", func(c *gin.Context) {
