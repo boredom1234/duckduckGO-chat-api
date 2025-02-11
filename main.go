@@ -221,6 +221,11 @@ func CORSMiddleware() gin.HandlerFunc {
 	}
 }
 
+func init() {
+	// Set up logging format
+	log.SetFlags(log.Ldate | log.Ltime | log.Lmicroseconds)
+}
+
 func main() {
 	router := gin.Default()
 	router.Use(CORSMiddleware())
@@ -260,8 +265,8 @@ func main() {
 			return
 		}
 
-		// Log the user's message
-		log.Printf("User %s sent message: %s", userID, reqBody.Message)
+		// Log the user's message in a concise format
+		log.Printf("[CHAT] UserID=%s Type=Input Msg=%q", userID, reqBody.Message)
 
 		stream, err := chat.FetchStream(reqBody.Message)
 
@@ -276,8 +281,8 @@ func main() {
 		}
 		fullResponse := strings.Join(response, "")
 
-		// Log the AI's response
-		log.Printf("AI response for user %s: %s", userID, fullResponse)
+		// Log the AI's response in a concise format
+		log.Printf("[CHAT] UserID=%s Type=Output Msg=%q", userID, fullResponse)
 
 		c.JSON(http.StatusOK, gin.H{"response": fullResponse})
 	})
